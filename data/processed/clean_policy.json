@@ -1,0 +1,30 @@
+[
+  {
+    "type": "academic_policy",
+    "policy_id": "GRADUATION_POLICY",
+    "policy_name": "Graduation Policy",
+    "rules": [
+      "Students must maintain a minimum cumulative GPA of 2.0 to graduate",
+      "Students must complete all required program courses",
+      "Students must meet total credit requirements for the degree",
+      "Only courses with passing grades count toward graduation requirements",
+      "Residency requirements may apply (minimum credits completed at institution)"
+    ],
+    "source_url": "https://southcentral.edu/student-policies/graduation-policy",
+    "accessed_date": "28 March 2026"
+  },
+  {
+    "type": "academic_policy",
+    "policy_id": "GRADING_POLICY",
+    "policy_name": "Grading Policy",
+    "rules": [
+      "Minimum grade of C or better is required for prerequisite courses",
+      "Grades contribute to cumulative GPA",
+      "Courses may be repeated to improve grade",
+      "The highest grade may be used in GPA calculation after repeat",
+      "Failing grades do not satisfy prerequisite requirements"
+    ],
+    "source_url": "https://southcentral.edu/student-policies/grading-procedure-4000-09-01",
+    "accessed_date": "28 March 2026"
+  }
+]

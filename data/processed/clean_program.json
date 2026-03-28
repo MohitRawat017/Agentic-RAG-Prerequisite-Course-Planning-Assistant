@@ -1,0 +1,40 @@
+{
+  "type": "program_requirement",
+  "program_id": "AAS_INFORMATION_SYSTEMS",
+  "program_name": "Information Systems AAS",
+  "total_credits_required": 60,
+  "core_courses": [
+    "COMP1120",
+    "COMP1130",
+    "COMP1140",
+    "COMP1200",
+    "COMP1360"
+  ],
+  "electives": [
+    "COMP2145",
+    "COMP2150",
+    "COMP2300",
+    "COMP2312",
+    "COMP2460"
+  ],
+  "general_education": [
+    {
+      "type": "OR",
+      "options": ["ENGL100", "ENGL240"]
+    },
+    {
+      "type": "OR",
+      "options": ["COMM110", "COMM120"]
+    },
+    "MATH120"
+  ],
+  "capstone": "COMP2496",
+  "rules": [
+    "Students must complete all required core courses",
+    "Students must complete required electives to meet total credits",
+    "Students must complete general education requirements",
+    "Total credits must be at least 60"
+  ],
+  "source_url": "https://southcentral.edu/award/aas3275",
+  "accessed_date": "28 March 2026"
+}

@@ -1,0 +1,6 @@
+{
+  "completed_courses": ["COMP1130", "COMP1140"],
+  "grades": {"COMP1130": "B", "COMP1140": "C"},
+  "assessments": {},
+  "exceptions": []
+}

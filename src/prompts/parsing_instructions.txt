@@ -1,0 +1,1 @@
+This is a university catalog. Extract course descriptions, prerequisites, program requirements, and academic policies exactly as written. Preserve tables and lists.

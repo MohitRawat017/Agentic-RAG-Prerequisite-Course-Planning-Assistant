@@ -1,0 +1,5 @@
+Extract the course outline text exactly as written from this South Central College PDF.
+Keep the course title, course code, description, prerequisites, corequisites, and credits.
+Do not summarize.
+Preserve line breaks around section headers such as Description, Total Credits, and Pre/Corequisites.
+Ignore page numbers, headers, and repeated footer text when possible.
