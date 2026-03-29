@@ -7,10 +7,15 @@ from src.utils.constants import DEFAULT_FALLBACK_MAX_CREDITS
 
 
 def verifier_node(state: GraphState) -> GraphState:
+    grounded_output = _build_grounded_verified_output(state)
     planner_verified_output = _verify_planner_output(state)
     return {
         **state,
-        "verified_output": planner_verified_output or _build_grounded_verified_output(state),
+        "verified_output": (
+            planner_verified_output
+            if _should_use_planner_output(grounded_output, planner_verified_output, state.get("intent"))
+            else grounded_output
+        ),
     }
 
 
@@ -27,6 +32,18 @@ def _build_grounded_verified_output(state: GraphState) -> dict[str, list[str] | 
     if intent == "requirement_lookup":
         return _build_requirement_lookup_output(state)
     return _build_safe_output(state)
+
+
+def _should_use_planner_output(
+    grounded_output: dict[str, list[str] | str],
+    planner_verified_output: dict[str, list[str] | str] | None,
+    intent: str | None,
+) -> bool:
+    if planner_verified_output is None:
+        return False
+    if intent == "unsupported_catalog_question":
+        return False
+    return _is_safe_uncited_answer(str(grounded_output.get("answer_plan", "")))
 
 
 def _verify_planner_output(state: GraphState) -> dict[str, list[str] | str] | None:
@@ -63,6 +80,8 @@ def _verify_planner_output(state: GraphState) -> dict[str, list[str] | str] | No
     if planner_citations and set(planner_citations) != set(derived_citations):
         return None
 
+    if _is_safe_uncited_answer(answer_plan) and (planner_citations or derived_citations):
+        return None
     if normalized_why and not derived_citations:
         return None
     if not normalized_why and not _is_safe_uncited_answer(answer_plan):
@@ -84,20 +103,10 @@ def _verify_planner_output(state: GraphState) -> dict[str, list[str] | str] | No
 
 
 def _build_unsupported_output(state: GraphState) -> dict[str, list[str] | str]:
-    profile = state.get("student_profile", {})
-    target_course_id = profile.get("target_course")
-    chunk_id = _find_chunk_id_for_course(state, target_course_id) if target_course_id else None
-    why: list[str] = []
-    citations: list[str] = []
-
-    if chunk_id:
-        why.append(f"The retrieved catalog chunk for {target_course_id} does not include the information you asked for.")
-        citations.append(chunk_id)
-
     return {
         "answer_plan": "I do not have that information in the provided catalog/policies.",
-        "why": why,
-        "citations": citations,
+        "why": ["The information you asked for is not present in the retrieved catalog chunks."],
+        "citations": [],
         "clarifying_questions": [],
         "assumptions_not_in_catalog": _merge_unique_lists(
             state.get("context_assumptions", []),
@@ -150,8 +159,14 @@ def _build_prerequisite_check_output(state: GraphState) -> dict[str, list[str] |
         if chunk_id:
             if _prereq_is_none(course_record):
                 why.append(f"{target_course_id} does not list any catalog prerequisite courses.")
+            elif _is_skill_only_prerequisite_text(prereq_text):
+                why.append(
+                    f"{target_course_id} does not list enforceable course prerequisites; the catalog only describes background skills."
+                )
             else:
                 why.append(f"The courses and grades you provided satisfy the listed prerequisite rule for {target_course_id}.")
+        if evaluation["manual_options"] and _is_skill_only_prerequisite_text(prereq_text):
+            assumptions.append("Skill-based prerequisite notes were treated as informational only and did not block eligibility.")
         return {
             "answer_plan": f"Eligible to take {target_course_id} based on the catalog requirements you provided.",
             "why": why,
@@ -218,10 +233,8 @@ def _build_prerequisite_path_output(state: GraphState) -> dict[str, list[str] | 
         )
 
     sequence = _build_course_sequence(target_course_id, course_map)
+    direct_courses = _ordered_direct_course_ids(target_course, course_map)
     completed_courses = set(profile.get("completed_courses", []))
-    grades = dict(profile.get("grades", {}))
-    has_instructor_permission = bool(profile.get("has_instructor_permission"))
-    evaluation = _evaluate_course_readiness(target_course, completed_courses, grades, has_instructor_permission)
 
     target_chunk_id = _find_chunk_id_for_course(state, target_course_id)
     why: list[str] = []
@@ -246,22 +259,15 @@ def _build_prerequisite_path_output(state: GraphState) -> dict[str, list[str] | 
 
     clarifying_questions: list[str] = []
     assumptions = list(state.get("context_assumptions", []))
-    if evaluation["manual_options"] and not has_instructor_permission:
-        assumptions.append(
-            f"The catalog also lists alternate paths such as {', '.join(evaluation['manual_options'])}, but this sequence focuses on the course-based path."
-        )
 
     if completed_courses:
         remaining = [course_id for course_id in sequence if course_id not in completed_courses]
         if remaining:
             answer_plan = f"Next step toward {target_course_id}: take {remaining[0]} next."
-        elif evaluation["status"] == "need_more_info" and evaluation["missing_grades"]:
-            answer_plan = f"You have completed the course path toward {target_course_id}, but I still need your grades to confirm eligibility."
-            clarifying_questions.append(_grade_question(evaluation["missing_grades"]))
-        elif evaluation["status"] == "eligible" or evaluation["used_permission"]:
-            answer_plan = f"You appear to have completed the course path toward {target_course_id}."
         else:
-            answer_plan = f"To reach {target_course_id}, you still need to satisfy the remaining direct prerequisite rule."
+            answer_plan = f"You have completed the course path leading up to {target_course_id}."
+    elif _wants_direct_prerequisite_list(state.get("query", "")) and direct_courses:
+        answer_plan = f"Required courses before {target_course_id}: {', '.join(direct_courses)}."
     else:
         full_path = sequence + [target_course_id] if sequence else [target_course_id]
         answer_plan = f"Course path to reach {target_course_id}: {' -> '.join(full_path)}."
@@ -323,18 +329,21 @@ def _build_requirement_lookup_output(state: GraphState) -> dict[str, list[str] |
                     "why": why,
                     "citations": citations,
                     "clarifying_questions": clarifying_questions,
-                    "assumptions_not_in_catalog": _merge_unique_lists(state.get("context_assumptions", [])),
+                        "assumptions_not_in_catalog": _merge_unique_lists(state.get("context_assumptions", [])),
                 }
 
             why.extend(
                 [
                     f"The program chunk states that {program.get('program_name')} requires {program.get('total_credits_required')} total credits.",
-                    f"The same chunk lists core courses such as {', '.join(program.get('core_courses', []))}.",
-                    f"The same chunk also lists electives, general education requirements, and the capstone requirement.",
+                    f"The same chunk lists these core courses: {', '.join(program.get('core_courses', []))}.",
+                    "The same chunk also mentions additional elective, general education, and capstone requirements.",
                 ]
             )
         return {
-            "answer_plan": f"The {program.get('program_name')} program requires {program.get('total_credits_required')} total credits.",
+            "answer_plan": (
+                f"The retrieved program chunk lists these core courses for {program.get('program_name')}: "
+                f"{', '.join(program.get('core_courses', []))}."
+            ),
             "why": why,
             "citations": citations,
             "clarifying_questions": [],
@@ -495,6 +504,8 @@ def _evaluate_course_readiness(
     if parsed_prereq is None:
         if prereq_text.lower() == "none":
             return _result("eligible")
+        if _is_skill_only_prerequisite_text(prereq_text):
+            return _result("eligible", manual_options=[prereq_text])
         return _result("need_more_info", manual_options=[prereq_text])
 
     return _evaluate_prereq_node(parsed_prereq, completed_courses, grades, has_instructor_permission)
@@ -538,7 +549,7 @@ def _evaluate_prereq_node(
 
     if node_type == "NON_ENFORCEABLE":
         reason = str(node.get("reason") or "additional experience requirement")
-        return _result("need_more_info", manual_options=[reason])
+        return _result("eligible", manual_options=[reason])
 
     if node_type == "AND":
         results = [
@@ -646,6 +657,23 @@ def _build_course_sequence(
     return ordered
 
 
+def _ordered_direct_course_ids(course_record: dict[str, Any], course_map: dict[str, dict[str, Any]]) -> list[str]:
+    branch = _preferred_course_branch(course_record.get("parsed_prereq"))
+    direct_courses = _collect_course_ids(branch)
+    direct_courses.sort(
+        key=lambda dependency_id: (
+            0 if _build_course_sequence(dependency_id, course_map, set()) else 1,
+            dependency_id,
+        )
+    )
+    return direct_courses
+
+
+def _wants_direct_prerequisite_list(query: str) -> bool:
+    lowered = str(query or "").lower()
+    return "what courses do i need" in lowered or "before taking" in lowered
+
+
 def _preferred_course_branch(node: dict[str, Any] | None) -> dict[str, Any] | None:
     if not isinstance(node, dict):
         return None
@@ -731,6 +759,13 @@ def _normalized_prereq_text(course_record: dict[str, Any]) -> str:
     raw_value = course_record.get("prerequisites")
     text = " ".join(str(raw_value or "None").split())
     return text or "None"
+
+
+def _is_skill_only_prerequisite_text(prereq_text: str) -> bool:
+    lowered = " ".join(str(prereq_text or "").split()).lower()
+    if not lowered or lowered == "none":
+        return False
+    return "(skill)" in lowered or "skill -" in lowered or "basic windows navigation" in lowered
 
 
 def _prereq_is_none(course_record: dict[str, Any]) -> bool:
