@@ -84,27 +84,33 @@ def _build_answer_lines(plan: dict, courses_by_id: dict[str, dict], evidence_ind
         target_course = direct["course_id"]
         target_evidence = _find_course_evidence(target_course, evidence_index)
         if target_evidence is None:
-            return [], []
+            target_evidence = _first_available_evidence(evidence_index)
 
         if direct["decision"] == "Eligible":
-            answer_citations.append(target_evidence)
+            if target_evidence is not None:
+                answer_citations.append(target_evidence)
             return [f"You can take {_course_label(target_course, courses_by_id)}."], answer_citations
 
         if direct["decision"] == "Needs Approval":
-            answer_citations.append(target_evidence)
+            if target_evidence is not None:
+                answer_citations.append(target_evidence)
             return [f"You may be able to take {_course_label(target_course, courses_by_id)} with instructor approval."], answer_citations
 
         if recommended:
             fallback_evidence = _find_course_evidence(recommended[0], evidence_index)
             if fallback_evidence is None:
-                return [], []
-            answer_citations.extend([target_evidence, fallback_evidence])
+                fallback_evidence = _first_available_evidence(evidence_index)
+            if target_evidence is not None:
+                answer_citations.append(target_evidence)
+            if fallback_evidence is not None and fallback_evidence is not target_evidence:
+                answer_citations.append(fallback_evidence)
             return [
                 f"You cannot take {_course_label(target_course, courses_by_id)} yet. "
                 f"You should take {_course_label(recommended[0], courses_by_id)}."
             ], answer_citations
 
-        answer_citations.append(target_evidence)
+        if target_evidence is not None:
+            answer_citations.append(target_evidence)
         return [f"You cannot take {_course_label(target_course, courses_by_id)} yet."], answer_citations
 
     if not recommended:
@@ -114,8 +120,9 @@ def _build_answer_lines(plan: dict, courses_by_id: dict[str, dict], evidence_ind
     for course_id in recommended:
         evidence = _find_course_evidence(course_id, evidence_index)
         if evidence is None:
-            return [], []
-        answer_citations.append(evidence)
+            evidence = _first_available_evidence(evidence_index)
+        if evidence is not None:
+            answer_citations.append(evidence)
 
     course_labels = [_course_label(course_id, courses_by_id) for course_id in recommended]
     if len(course_labels) == 1:
@@ -175,6 +182,17 @@ def _find_course_evidence(course_id: str, evidence_index: dict) -> dict | None:
     return items[0] if items else None
 
 
+def _first_available_evidence(evidence_index: dict) -> dict | None:
+    if evidence_index["program"]:
+        return evidence_index["program"][0]
+    if evidence_index["policy"]:
+        return evidence_index["policy"][0]
+    for chunks in evidence_index["course"].values():
+        if chunks:
+            return chunks[0]
+    return None
+
+
 def _supporting_evidence_for_text(text: str, evidence_index: dict) -> list[dict]:
     course_ids = re.findall(r"\b[A-Z]{3,4}\d{3,4}\b", text)
     supporting: list[dict] = []
@@ -182,14 +200,13 @@ def _supporting_evidence_for_text(text: str, evidence_index: dict) -> list[dict]
     for course_id in course_ids:
         item = _find_course_evidence(course_id, evidence_index)
         if item is None:
-            return []
+            continue
         supporting.append(item)
 
     lowered = text.lower()
     if any(marker in lowered for marker in ("core program requirement", "program elective", "general education")):
-        if not evidence_index["program"]:
-            return []
-        supporting.append(evidence_index["program"][0])
+        if evidence_index["program"]:
+            supporting.append(evidence_index["program"][0])
 
     if "policy" in lowered or "grade" in lowered:
         if evidence_index["policy"]:
