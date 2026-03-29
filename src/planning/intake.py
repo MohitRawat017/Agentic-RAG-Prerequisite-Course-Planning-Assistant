@@ -26,12 +26,38 @@ ABSTAIN_RESPONSE = {
     "unsupported_query": True,
 }
 
+GREETING_RESPONSE = {
+    "intent": "greeting",
+    "target_course": None,
+    "completed_courses": [],
+    "grades": {},
+    "assessments": {},
+    "max_credits": None,
+    "target_program": DEFAULT_PROGRAM_ID,
+    "include_general_education": False,
+    "query": None,
+    "greeting_query": True,
+}
+
+TARGET_COURSE_PATTERNS = [
+    re.compile(r"\bcan\s+i\s+take\s+([A-Za-z]{3,4}\s*\d{3,4})\b", re.IGNORECASE),
+    re.compile(r"\bam\s+i\s+eligible\s+for\s+([A-Za-z]{3,4}\s*\d{3,4})\b", re.IGNORECASE),
+    re.compile(r"\b(?:to\s+reach|reach)\s+([A-Za-z]{3,4}\s*\d{3,4})\b", re.IGNORECASE),
+    re.compile(r"\bwhen\s+is\s+([A-Za-z]{3,4}\s*\d{3,4})\b", re.IGNORECASE),
+    re.compile(r"\bwho\s+teaches\s+([A-Za-z]{3,4}\s*\d{3,4})\b", re.IGNORECASE),
+    re.compile(r"\b(?:schedule|time)\s+(?:for\s+)?([A-Za-z]{3,4}\s*\d{3,4})\b", re.IGNORECASE),
+]
+
 
 def parse_planning_request(query: str | None, payload: dict | None) -> dict:
     if payload is not None:
         return _normalize_request(payload, query)
     if query is None:
         raise ValueError("Provide either a freeform query or a structured payload")
+    if is_greeting_query(query):
+        response = dict(GREETING_RESPONSE)
+        response["query"] = query
+        return response
     if not is_supported_query(query):
         response = dict(ABSTAIN_RESPONSE)
         response["query"] = query
@@ -65,6 +91,10 @@ def _parse_query_with_llm(query: str) -> dict:
 def _normalize_request(payload: dict, fallback_query: str | None = None) -> dict:
     student = payload.get("student", {}) if isinstance(payload.get("student"), dict) else {}
     raw_query = payload.get("query") or fallback_query
+    if raw_query is not None and is_greeting_query(raw_query):
+        response = dict(GREETING_RESPONSE)
+        response["query"] = raw_query
+        return response
     if raw_query is not None and not is_supported_query(raw_query):
         response = dict(ABSTAIN_RESPONSE)
         response["query"] = raw_query
@@ -153,10 +183,29 @@ def is_supported_query(query: str) -> bool:
     return not any(keyword in lowered for keyword in unsupported_keywords)
 
 
+def is_greeting_query(query: str) -> bool:
+    lowered = " ".join(query.lower().split())
+    greeting_patterns = (
+        "hi",
+        "hii",
+        "hiii",
+        "hello",
+        "hey",
+        "good morning",
+        "good afternoon",
+        "good evening",
+    )
+    return lowered in greeting_patterns
+
+
 def _extract_target_course(query: str | None) -> str | None:
     if query is None:
         return None
-    return _normalize_course_code(query)
+    for pattern in TARGET_COURSE_PATTERNS:
+        match = pattern.search(query)
+        if match:
+            return _normalize_course_code(match.group(1))
+    return None
 
 
 def _infer_intent(query: str | None, target_course: str | None) -> str | None:

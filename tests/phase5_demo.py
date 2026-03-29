@@ -29,6 +29,12 @@ _GRADE_IN_COURSE_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# Matches "<course-code> with grade <letter>" or "<course-code> with <letter>".
+_COURSE_WITH_GRADE_PATTERN = re.compile(
+    r"([A-Za-z]{3,4}\s*\d{3,4})\s+with\s+(?:a\s+grade\s+of\s+|grade\s+)?([A-F][+-]?)",
+    re.IGNORECASE,
+)
+
 # Matches "maximum/max [of] <N> credit[s]", capturing the numeric limit.
 _MAX_CREDITS_PATTERN = re.compile(
     r"(?:maximum|max)\s+(?:of\s+)?(\d+)\s+credits?",
@@ -92,6 +98,8 @@ def _completed_courses_for_query(query: str) -> list[str]:
 def _grades_for_query(query: str) -> dict[str, str]:
     grades: dict[str, str] = {}
     for grade, course in _GRADE_IN_COURSE_PATTERN.findall(query):
+        grades[re.sub(r"\s+", "", course).upper()] = grade.upper()
+    for course, grade in _COURSE_WITH_GRADE_PATTERN.findall(query):
         grades[re.sub(r"\s+", "", course).upper()] = grade.upper()
     return grades
 

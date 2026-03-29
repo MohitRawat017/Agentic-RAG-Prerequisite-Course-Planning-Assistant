@@ -1,3 +1,5 @@
+import re
+
 from src.rag.retriever import retrieve
 
 
@@ -14,6 +16,8 @@ def retrieve_plan_evidence(request: dict, plan: dict, vectorstore, k: int = 5) -
     direct_course = plan.get("direct_course_result", {}).get("course_id") if plan.get("direct_course_result") else None
     if direct_course:
         queries.append(direct_course)
+    for justification in plan.get("justification", []):
+        queries.extend(re.findall(r"\b[A-Z]{3,4}\d{3,4}\b", justification))
 
     evidence: list[dict] = []
     seen_chunk_ids: set[str] = set()

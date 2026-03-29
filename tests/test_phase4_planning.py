@@ -157,6 +157,18 @@ def test_unsupported_query_abstains() -> None:
     assert plan["justification"] == ["I don't have that information in the provided catalog or policies."]
 
 
+def test_greeting_query_does_not_trigger_planning() -> None:
+    request = parse_planning_request("hii", None)
+
+    plan = build_course_plan(request, _sample_courses(), _sample_program(), [])
+
+    assert request["greeting_query"] is True
+    assert plan["mode"] == "clarification_only"
+    assert plan["recommended_courses"] == []
+    assert plan["justification"] == ["This is a greeting and does not contain a course-related query."]
+    assert plan["clarifying_questions"] == ["What would you like help with? (e.g., checking prerequisites, planning courses)"]
+
+
 def test_non_enforceable_prereq_is_treated_as_non_blocking() -> None:
     request = {
         "intent": "course_planning",

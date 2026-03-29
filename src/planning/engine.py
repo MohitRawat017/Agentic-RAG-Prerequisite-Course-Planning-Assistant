@@ -15,6 +15,11 @@ def build_course_plan(request: dict, courses: list[dict], program: dict, policie
     query_text = (request.get("query") or "").lower()
 
     plan = _empty_plan(target_program)
+    if request.get("greeting_query"):
+        plan["justification"] = ["This is a greeting and does not contain a course-related query."]
+        plan["clarifying_questions"] = ["What would you like help with? (e.g., checking prerequisites, planning courses)"]
+        plan["assumptions"] = ["No course-related query was provided."]
+        return plan
     if request.get("unsupported_query"):
         plan["justification"] = ["I don't have that information in the provided catalog or policies."]
         return plan

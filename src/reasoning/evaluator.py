@@ -112,11 +112,11 @@ def _evaluate_course_node(node: dict, student: dict) -> dict:
     grade_value = grades.get(course_code)
     if grade_value is None:
         return {
-            "passed": False,
-            "missing": [f"grade for {course_code}"],
-            "reason": [f"Missing grade for {course_code}"],
+            "passed": True,
+            "missing": [],
+            "reason": [f"{course_code} satisfied by completion"],
             "manual_review": False,
-            "needs_more_info": True,
+            "needs_more_info": False,
         }
 
     if _grade_meets_minimum(grade_value, min_grade):

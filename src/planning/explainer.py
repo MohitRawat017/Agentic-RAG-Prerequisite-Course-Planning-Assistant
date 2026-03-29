@@ -55,6 +55,14 @@ def _build_grounded_response(
     courses_by_id: dict[str, dict],
     retrieved_chunks: list[dict],
 ) -> dict:
+    if request.get("greeting_query"):
+        return {
+            "answer": ["Hello! How can I help you with your course planning today?"],
+            "why": ["This is a greeting and does not contain a course-related query."],
+            "citations": ["None"],
+            "clarifying_questions": list(plan.get("clarifying_questions", [])),
+            "assumptions": list(plan.get("assumptions", [])),
+        }
     if request.get("unsupported_query"):
         return _abstain_response(plan, request, retrieved_chunks)
 
