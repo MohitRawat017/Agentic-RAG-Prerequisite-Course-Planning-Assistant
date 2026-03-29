@@ -62,7 +62,17 @@ def _evaluate_node(node: dict, student: dict) -> dict:
     if node_type == "ASSESSMENT":
         return _evaluate_assessment_node(node, student)
 
-    if node_type in {"EXCEPTION", "UNKNOWN", "NON_ENFORCEABLE"}:
+    if node_type == "NON_ENFORCEABLE":
+        label = node.get("reason") or node.get("value") or "non-enforceable prerequisite"
+        return {
+            "passed": True,
+            "missing": [],
+            "reason": [f"Informal prerequisite noted but not enforced: {label}"],
+            "manual_review": False,
+            "needs_more_info": False,
+        }
+
+    if node_type in {"EXCEPTION", "UNKNOWN"}:
         label = node.get("value") or node.get("reason")
         return {
             "passed": False,

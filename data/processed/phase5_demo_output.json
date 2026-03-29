@@ -1,0 +1,93 @@
+[
+  {
+    "query": "I have completed COMP1120 and COMP1130. I want to plan my next semester with a maximum of 8 credits.",
+    "recommended_courses": [],
+    "citations": [
+      "program_AAS_INFORMATION_SYSTEMS_1",
+      "course_COMP1130_1",
+      "course_COMP2145_1",
+      "course_COMP1120_1",
+      "course_COMP1360_1",
+      "course_COMP1200_1",
+      "course_COMP2452_1",
+      "course_COMP1125_1",
+      "course_COMP1140_1",
+      "course_COMP2312_1"
+    ],
+    "explanation": "Answer / Plan:\nI don't have that information in the provided catalog or policies.\n\nWhy (requirements/prereqs satisfied):\n- I don't have that information in the provided catalog or policies.\n\nCitations:\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n- COMP1130: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1130_1)\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n- COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1120_1)\n- COMP1360: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1360_1)\n- COMP1200: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1200_1)\n- COMP2452: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2452_1)\n- COMP1125: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1125_1)\n- COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1140_1)\n- COMP2312: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2312_1)\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP1120 was requested but is not present in the course catalog dataset."
+  },
+  {
+    "query": "Can I take COMP2145?",
+    "recommended_courses": [
+      "COMP1140"
+    ],
+    "citations": [
+      "course_COMP2145_1",
+      "program_AAS_INFORMATION_SYSTEMS_1",
+      "course_COMP2460_1",
+      "course_COMP2453_1",
+      "course_COMP2496_1",
+      "course_COMP1200_1",
+      "course_COMP2452_1",
+      "course_COMP1125_1",
+      "course_COMP1120_1",
+      "course_COMP1360_1",
+      "course_COMP2498_1",
+      "course_COMP1130_1",
+      "course_COMP1140_1"
+    ],
+    "explanation": "Answer / Plan:\nYou cannot take COMP2145 (Web Programming) yet. You should take COMP1140 (Web For Business).\n\nWhy (requirements/prereqs satisfied):\n- COMP2145 is not currently eligible.\n- COMP1140 (Web For Business) is a core program requirement and is eligible.\n- COMP2145 may also be possible with instructor permission.\n\nCitations:\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n- COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1140_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset."
+  },
+  {
+    "query": "Can I take COMP2145 with instructor permission?",
+    "recommended_courses": [],
+    "citations": [
+      "course_COMP2145_1",
+      "course_COMP2460_1",
+      "course_COMP1360_1",
+      "course_COMP2453_1",
+      "program_AAS_INFORMATION_SYSTEMS_1",
+      "course_COMP1200_1",
+      "course_COMP2452_1",
+      "course_COMP1125_1",
+      "course_COMP1120_1",
+      "course_COMP2498_1"
+    ],
+    "explanation": "Answer / Plan:\nYou may be able to take COMP2145 (Web Programming) with instructor approval.\n\nWhy (requirements/prereqs satisfied):\n- COMP2145 may be taken with instructor permission if approval is granted.\n\nCitations:\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n\nClarifying questions (if needed):\n- Do you have instructor approval for COMP2145?\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset."
+  },
+  {
+    "query": "I completed COMP1120, COMP1130, and COMP1140. Can I take COMP2145?",
+    "recommended_courses": [],
+    "citations": [
+      "course_COMP2145_1",
+      "course_COMP1130_1",
+      "program_AAS_INFORMATION_SYSTEMS_1",
+      "course_COMP1120_1",
+      "course_COMP2460_1",
+      "course_COMP1200_1",
+      "course_COMP2452_1",
+      "course_COMP1125_1",
+      "course_COMP1140_1",
+      "course_COMP2312_1"
+    ],
+    "explanation": "Answer / Plan:\nI don't have that information in the provided catalog or policies.\n\nWhy (requirements/prereqs satisfied):\n- I don't have that information in the provided catalog or policies.\n\nCitations:\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n- COMP1130: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1130_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n- COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1120_1)\n- COMP2460: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2460_1)\n- COMP1200: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1200_1)\n- COMP2452: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2452_1)\n- COMP1125: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1125_1)\n- COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1140_1)\n- COMP2312: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2312_1)\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP1120 was requested but is not present in the course catalog dataset."
+  },
+  {
+    "query": "When is COMP2145 offered?",
+    "recommended_courses": [],
+    "citations": [
+      "course_COMP2145_1",
+      "course_COMP2460_1",
+      "course_COMP2453_1",
+      "course_COMP2466_1",
+      "course_COMP1360_1",
+      "program_AAS_INFORMATION_SYSTEMS_1",
+      "course_COMP1200_1",
+      "course_COMP2452_1",
+      "course_COMP1125_1",
+      "course_COMP1120_1",
+      "course_COMP2498_1"
+    ],
+    "explanation": "Answer / Plan:\nI don't have that information in the provided catalog or policies.\n\nWhy (requirements/prereqs satisfied):\n- I don't have that information in the provided catalog or policies.\n\nCitations:\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n- COMP2460: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2460_1)\n- COMP2453: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2453_1)\n- COMP2466: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2466_1)\n- COMP1360: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1360_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n- COMP1200: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1200_1)\n- COMP2452: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2452_1)\n- COMP1125: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1125_1)\n- COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1120_1)\n- COMP2498: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2498_1)\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\nNone"
+  }
+]
