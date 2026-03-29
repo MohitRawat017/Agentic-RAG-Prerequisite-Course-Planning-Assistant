@@ -1,18 +1,15 @@
-from pathlib import Path
+from src.utils.constants import (
+    DEFAULT_CHROMA_DIR,
+    DEFAULT_COURSES_PATH,
+    DEFAULT_OUTPUT_PATH,
+    DEFAULT_POLICIES_PATH,
+    DEFAULT_PROGRAM_PATH,
+    PROCESSED_DATA_DIR,
+)
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PROMPTS_DIR = PROJECT_ROOT / "src" / "prompts"
-DEFAULT_COURSE_FILE = PROJECT_ROOT / "data" / "processed" / "full_cleaned_documents_with_logic.json"
-DEFAULT_PROGRAM_FILE = PROJECT_ROOT / "data" / "processed" / "clean_program.json"
-DEFAULT_POLICY_FILE = PROJECT_ROOT / "data" / "processed" / "clean_policy.json"
-DEFAULT_PLAN_REQUEST_FILE = PROJECT_ROOT / "data" / "processed" / "sample_planning_request.json"
-DEFAULT_PLAN_OUTPUT_FILE = PROJECT_ROOT / "data" / "processed" / "sample_course_plan.json"
-INTAKE_PROMPT_FILE = PROMPTS_DIR / "phase4_intake_prompt.txt"
-EXPLANATION_PROMPT_FILE = PROMPTS_DIR / "phase5_grounded_explanation_prompt.txt"
-DEFAULT_CHROMA_DIR = PROJECT_ROOT / "chroma_db"
-DEFAULT_RAG_DEMO_OUTPUT_FILE = PROJECT_ROOT / "data" / "processed" / "phase5_demo_output.json"
-DEFAULT_GRADIO_HISTORY_FILE = PROJECT_ROOT / "data" / "processed" / "gradio_chat_history.json"
-
-DEFAULT_INTENT = "course_planning"
-DEFAULT_PROGRAM_ID = "AAS_INFORMATION_SYSTEMS"
+DEFAULT_COURSE_FILE = DEFAULT_COURSES_PATH
+DEFAULT_PROGRAM_FILE = DEFAULT_PROGRAM_PATH
+DEFAULT_POLICY_FILE = DEFAULT_POLICIES_PATH
+DEFAULT_PLAN_OUTPUT_FILE = DEFAULT_OUTPUT_PATH
+DEFAULT_GRADIO_HISTORY_FILE = PROCESSED_DATA_DIR / "gradio_chat_history.json"

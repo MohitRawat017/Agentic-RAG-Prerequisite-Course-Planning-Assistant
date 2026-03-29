@@ -18,3 +18,9 @@ Review
 
 .github 
 AGENTS.md
+
+./tests
+./temp_chroma
+
+chroma_db
+

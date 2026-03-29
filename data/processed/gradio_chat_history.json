@@ -1,1065 +1,186 @@
 {
   "sessions": [
     {
-      "session_id": "410a4096-9baa-4221-ab87-aea5223d3c67",
-      "title": "Hello",
-      "created_at": "2026-03-29T12:01:34.558597+00:00",
-      "updated_at": "2026-03-29T12:05:28.224508+00:00",
+      "session_id": "e5106d5d-3281-4453-b4d1-6466370e1675",
+      "title": "hi",
+      "created_at": "2026-03-29T19:14:31.267622+00:00",
+      "updated_at": "2026-03-29T19:17:16.964028+00:00",
       "messages": [
         {
           "role": "user",
-          "content": "Hello",
+          "content": "hi",
           "artifacts": null,
-          "timestamp": "2026-03-29T12:01:42.992841+00:00"
+          "timestamp": "2026-03-29T19:15:36.088434+00:00"
         },
         {
           "role": "assistant",
-          "content": "Answer / Plan:\nHello! How can I help you with your course planning today?\n\nWhy (requirements/prereqs satisfied):\n- This is a greeting and does not contain a course-related query.\n\nCitations:\nNone\n\nClarifying questions (if needed):\n- What would you like help with? (e.g., checking prerequisites, planning courses)\n\nAssumptions / Not in catalog:\n- No course-related query was provided.",
+          "content": "Answer / Plan:\nNeed more info to answer this from the catalog.\n\nWhy (requirements/prereqs satisfied):\nNone\n\nCitations:\nNone\n\nClarifying questions (if needed):\n- Which course or program should I look up in the catalog?\n\nAssumptions / Not in catalog:\n- The request is missing a required target course or program identifier.",
           "artifacts": {
-            "plan": {
-              "mode": "clarification_only",
-              "recommended_courses": [],
-              "total_credits": 0,
-              "direct_course_result": null,
-              "justification": [
-                "This is a greeting and does not contain a course-related query."
-              ],
-              "risks": [],
-              "clarifying_questions": [
-                "What would you like help with? (e.g., checking prerequisites, planning courses)"
-              ],
-              "assumptions": [
-                "No course-related query was provided."
-              ],
-              "alternative_courses": [],
-              "target_program": "AAS_INFORMATION_SYSTEMS",
-              "course_evaluations": {},
-              "citations": []
-            },
-            "verification": {
-              "has_retrieved_chunks": true,
-              "recommended_course_ids": [],
-              "direct_course_id": null,
-              "chunk_count": 9
-            },
-            "retrieved_chunks": [
-              {
-                "course_id": "COMM140",
-                "course_code": "COMM140",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMM140_1",
-                "type": "course"
-              },
-              {
-                "type": "course",
-                "course_id": "COMM110",
-                "chunk_id": "course_COMM110_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMM110"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMM160",
-                "type": "course",
-                "course_code": "COMM160",
-                "chunk_id": "course_COMM160_1"
-              },
-              {
-                "type": "course",
-                "course_code": "COMP1120",
-                "chunk_id": "course_COMP1120_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1120"
-              },
-              {
-                "chunk_id": "course_COMM130_1",
-                "type": "course",
-                "course_id": "COMM130",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMM130"
-              },
-              {
-                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1",
-                "source_url": "https://southcentral.edu/award/aas3275",
-                "program_id": "AAS_INFORMATION_SYSTEMS",
-                "type": "program"
-              },
-              {
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1200",
-                "course_code": "COMP1200",
-                "chunk_id": "course_COMP1200_1"
-              },
-              {
-                "course_id": "COMP2452",
-                "chunk_id": "course_COMP2452_1",
-                "type": "course",
-                "course_code": "COMP2452",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1125",
-                "course_id": "COMP1125",
-                "chunk_id": "course_COMP1125_1"
-              }
-            ]
+            "planner_output": {},
+            "verified_output": {},
+            "retrieved_chunks": []
           },
-          "timestamp": "2026-03-29T12:01:47.441498+00:00"
+          "timestamp": "2026-03-29T19:15:36.122954+00:00"
         },
         {
           "role": "user",
-          "content": "Can I take COMP2145?",
+          "content": "Can I take COMP2145 if I have completed COMP1120 and COMP1130?",
           "artifacts": null,
-          "timestamp": "2026-03-29T12:03:20.783047+00:00"
+          "timestamp": "2026-03-29T19:15:44.595088+00:00"
         },
         {
           "role": "assistant",
-          "content": "Answer / Plan:\nYou cannot take COMP2145 (Web Programming) yet. You should take COMP1140 (Web For Business).\n\nWhy (requirements/prereqs satisfied):\n- COMP2145 is not currently eligible.\n- COMP1140 (Web For Business) is a core program requirement and is eligible.\n- COMP2145 may also be possible with instructor permission.\n\nCitations:\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n- COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1140_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset.",
+          "content": "Answer / Plan:\nNot eligible\n\nWhy (requirements/prereqs satisfied):\n- You are missing COMP1140 which is a required prerequisite for COMP2145\n\nCitations:\n- course_COMP2145 | Web Programming | https://southcentral.edu/webdocs/current_cco/COMP2145_cco_2026.pdf\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\nNone",
           "artifacts": {
-            "plan": {
-              "mode": "direct_course_check",
-              "recommended_courses": [
-                "COMP1140"
+            "planner_output": {
+              "answer_plan": "Not eligible",
+              "why": [
+                "You are missing COMP1140 which is a required prerequisite for COMP2145 [[course_COMP2145]]"
               ],
-              "total_credits": 3,
-              "direct_course_result": {
-                "course_id": "COMP2145",
-                "decision": "Not Eligible",
-                "missing": [
-                  "COMP1140",
-                  "COMP1130"
-                ],
-                "reason": [
-                  "COMP1140 not completed",
-                  "COMP1130 not completed"
-                ]
-              },
-              "justification": [
-                "COMP2145 is not currently eligible.",
-                "COMP1140 (Web For Business) is a core program requirement and is eligible.",
-                "COMP2145 may also be possible with instructor permission."
-              ],
-              "risks": [
-                "Future course options depend on completing COMP1140."
+              "citations": [
+                "course_COMP2145"
               ],
               "clarifying_questions": [],
-              "assumptions": [
-                "COMP2150 is referenced in the program JSON but missing from the course catalog dataset.",
-                "COMP2300 is referenced in the program JSON but missing from the course catalog dataset."
-              ],
-              "alternative_courses": [
-                "COMP1120",
-                "COMP1200",
-                "COMP1360"
-              ],
-              "target_program": "AAS_INFORMATION_SYSTEMS",
-              "course_evaluations": {
-                "COMP1120": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1130": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1120"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1120 not completed"
-                  ]
-                },
-                "COMP1140": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1200": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1360": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP2145": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1140",
-                    "COMP1130"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1140 not completed",
-                    "COMP1130 not completed"
-                  ]
-                },
-                "COMP2312": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "Informal prerequisite noted but not enforced: a working knowledge of at least one programming language"
-                  ]
-                },
-                "COMP2460": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1200",
-                    "COMP1360"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1200 not completed",
-                    "COMP1360 not completed"
-                  ]
-                }
-              },
-              "citations": [
-                "COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275"
-              ]
+              "assumptions_not_in_catalog": []
             },
-            "verification": {
-              "has_retrieved_chunks": true,
-              "recommended_course_ids": [
-                "COMP1140"
+            "verified_output": {
+              "answer_plan": "Not eligible",
+              "why": [
+                "You are missing COMP1140 which is a required prerequisite for COMP2145"
               ],
-              "direct_course_id": "COMP2145",
-              "chunk_count": 13
+              "citations": [
+                "course_COMP2145"
+              ],
+              "clarifying_questions": [],
+              "assumptions_not_in_catalog": []
             },
             "retrieved_chunks": [
               {
-                "course_code": "COMP2145",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "type": "course",
-                "chunk_id": "course_COMP2145_1",
-                "course_id": "COMP2145"
-              },
-              {
-                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1",
-                "type": "program",
-                "source_url": "https://southcentral.edu/award/aas3275",
-                "program_id": "AAS_INFORMATION_SYSTEMS"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP2460",
-                "chunk_id": "course_COMP2460_1",
-                "course_id": "COMP2460",
-                "type": "course"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP2453",
-                "course_code": "COMP2453",
-                "type": "course",
-                "chunk_id": "course_COMP2453_1"
-              },
-              {
-                "course_code": "COMP2496",
-                "course_id": "COMP2496",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP2496_1",
-                "type": "course"
-              },
-              {
-                "course_id": "COMP1200",
-                "course_code": "COMP1200",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP1200_1"
-              },
-              {
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP2452_1",
-                "course_id": "COMP2452",
-                "course_code": "COMP2452"
-              },
-              {
-                "course_code": "COMP1125",
-                "course_id": "COMP1125",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP1125_1",
-                "type": "course"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1120",
-                "chunk_id": "course_COMP1120_1",
-                "type": "course",
-                "course_id": "COMP1120"
-              },
-              {
-                "chunk_id": "course_COMP1360_1",
-                "type": "course",
-                "course_code": "COMP1360",
-                "course_id": "COMP1360",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "course_code": "COMP2498",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP2498",
-                "type": "course",
-                "chunk_id": "course_COMP2498_1"
-              },
-              {
-                "course_id": "COMP1130",
-                "type": "course",
-                "course_code": "COMP1130",
-                "chunk_id": "course_COMP1130_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP1140_1",
-                "course_id": "COMP1140",
-                "type": "course",
-                "course_code": "COMP1140"
+                "chunk_id": "course_COMP2145",
+                "title": "Web Programming",
+                "record_type": "course",
+                "entity_id": "COMP2145",
+                "source_url": "https://southcentral.edu/webdocs/current_cco/COMP2145_cco_2026.pdf"
               }
             ]
           },
-          "timestamp": "2026-03-29T12:03:31.586606+00:00"
+          "timestamp": "2026-03-29T19:15:50.949947+00:00"
         },
         {
           "role": "user",
-          "content": "I finished COMP1120 and COMP1130, what next?",
+          "content": "I have completed COMP1120 and COMP1130. Plan my next semester with max 8 credits",
           "artifacts": null,
-          "timestamp": "2026-03-29T12:04:00.483565+00:00"
+          "timestamp": "2026-03-29T19:16:34.877842+00:00"
         },
         {
           "role": "assistant",
-          "content": "Answer / Plan:\nYou should take COMP1140 (Web For Business).\n\nWhy (requirements/prereqs satisfied):\n- COMP1140 (Web For Business) is a core program requirement and is eligible.\n\nCitations:\n- COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1140_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n\nClarifying questions (if needed):\n- What is your maximum credit load for next semester?\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset.",
+          "content": "Answer / Plan:\nSuggested next-term courses: COMP1140, COMP1360 (7 credits total).\n\nWhy (requirements/prereqs satisfied):\n- The program chunk lists required core courses for Information Systems AAS, and those are the first courses I prioritized.\n- COMP1140 is a listed program course and its retrieved chunk does not list any prerequisite courses.\n- COMP1360 is a listed program course and its retrieved chunk does not list any prerequisite courses.\n\nCitations:\n- program_AAS_INFORMATION_SYSTEMS | Information Systems AAS | https://southcentral.edu/award/aas3275\n- course_COMP1140 | Web For Business | https://southcentral.edu/webdocs/current_cco/COMP1140_cco_2026.pdf\n- course_COMP1360 | Introduction to Data Communications and | https://southcentral.edu/webdocs/current_cco/COMP1360_cco_2026.pdf\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\n- Used Information Systems AAS as the target program because it is the only program record in the current dataset.",
           "artifacts": {
-            "plan": {
-              "mode": "best_next",
-              "recommended_courses": [
-                "COMP1140"
+            "planner_output": {
+              "answer_plan": "Suggested next-term courses: COMP1140, COMP1360 (about 7 credits).",
+              "why": [
+                "The retrieved program chunk lists required core courses for Information Systems AAS. [[program_AAS_INFORMATION_SYSTEMS]]",
+                "COMP1140 lists \"Prerequisites: None\" in its retrieved course chunk. [[course_COMP1140]]",
+                "COMP1360 lists \"Prerequisites: None\" in its retrieved course chunk. [[course_COMP1360]]"
               ],
-              "total_credits": 3,
-              "direct_course_result": null,
-              "justification": [
-                "COMP1140 (Web For Business) is a core program requirement and is eligible."
-              ],
-              "risks": [
-                "Future course options depend on completing COMP1140."
-              ],
-              "clarifying_questions": [
-                "What is your maximum credit load for next semester?"
-              ],
-              "assumptions": [
-                "COMP2150 is referenced in the program JSON but missing from the course catalog dataset.",
-                "COMP2300 is referenced in the program JSON but missing from the course catalog dataset."
-              ],
-              "alternative_courses": [],
-              "target_program": "AAS_INFORMATION_SYSTEMS",
-              "course_evaluations": {
-                "COMP1140": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1200": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1360": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP2145": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1140"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1140 not completed",
-                    "COMP1130 satisfied by completion"
-                  ]
-                },
-                "COMP2312": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1130 satisfied by completion"
-                  ]
-                },
-                "COMP2460": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1200",
-                    "COMP1360"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1200 not completed",
-                    "COMP1360 not completed"
-                  ]
-                }
-              },
               "citations": [
-                "COMP1140: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275"
+                "program_AAS_INFORMATION_SYSTEMS",
+                "course_COMP1140",
+                "course_COMP1360"
+              ],
+              "clarifying_questions": [],
+              "assumptions_not_in_catalog": [
+                "Planner model was unavailable, so a conservative grounded fallback was used.",
+                "Groq planner quota or rate limit was unavailable during this run."
               ]
             },
-            "verification": {
-              "has_retrieved_chunks": true,
-              "recommended_course_ids": [
-                "COMP1140"
+            "verified_output": {
+              "answer_plan": "Suggested next-term courses: COMP1140, COMP1360 (7 credits total).",
+              "why": [
+                "The program chunk lists required core courses for Information Systems AAS, and those are the first courses I prioritized.",
+                "COMP1140 is a listed program course and its retrieved chunk does not list any prerequisite courses.",
+                "COMP1360 is a listed program course and its retrieved chunk does not list any prerequisite courses."
               ],
-              "direct_course_id": null,
-              "chunk_count": 10
+              "citations": [
+                "program_AAS_INFORMATION_SYSTEMS",
+                "course_COMP1140",
+                "course_COMP1360"
+              ],
+              "clarifying_questions": [],
+              "assumptions_not_in_catalog": [
+                "Used Information Systems AAS as the target program because it is the only program record in the current dataset."
+              ]
             },
             "retrieved_chunks": [
               {
-                "chunk_id": "course_COMP1130_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1130",
-                "course_code": "COMP1130",
-                "type": "course"
-              },
-              {
-                "course_code": "COMP1120",
-                "type": "course",
-                "chunk_id": "course_COMP1120_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1120"
-              },
-              {
-                "type": "program",
-                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1",
-                "program_id": "AAS_INFORMATION_SYSTEMS",
+                "chunk_id": "program_AAS_INFORMATION_SYSTEMS",
+                "title": "Information Systems AAS",
+                "record_type": "program_requirement",
+                "entity_id": "AAS_INFORMATION_SYSTEMS",
                 "source_url": "https://southcentral.edu/award/aas3275"
               },
               {
-                "course_code": "COMP2145",
-                "chunk_id": "course_COMP2145_1",
-                "type": "course",
-                "course_id": "COMP2145",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
+                "chunk_id": "course_COMP1140",
+                "title": "Web For Business",
+                "record_type": "course",
+                "entity_id": "COMP1140",
+                "source_url": "https://southcentral.edu/webdocs/current_cco/COMP1140_cco_2026.pdf"
               },
               {
-                "course_code": "COMP1360",
-                "course_id": "COMP1360",
-                "chunk_id": "course_COMP1360_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "type": "course"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1200",
-                "type": "course",
-                "chunk_id": "course_COMP1200_1",
-                "course_code": "COMP1200"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP2452_1",
-                "course_id": "COMP2452",
-                "course_code": "COMP2452",
-                "type": "course"
-              },
-              {
-                "chunk_id": "course_COMP1125_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1125",
-                "course_id": "COMP1125",
-                "type": "course"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1140",
-                "type": "course",
-                "course_code": "COMP1140",
-                "chunk_id": "course_COMP1140_1"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "type": "course",
-                "course_code": "COMP2460",
-                "chunk_id": "course_COMP2460_1",
-                "course_id": "COMP2460"
+                "chunk_id": "course_COMP1360",
+                "title": "Introduction to Data Communications and",
+                "record_type": "course",
+                "entity_id": "COMP1360",
+                "source_url": "https://southcentral.edu/webdocs/current_cco/COMP1360_cco_2026.pdf"
               }
             ]
           },
-          "timestamp": "2026-03-29T12:04:05.735089+00:00"
+          "timestamp": "2026-03-29T19:16:36.104111+00:00"
         },
         {
           "role": "user",
-          "content": "umm what should i do next sem?",
+          "content": "When is COMP2145 offered ?",
           "artifacts": null,
-          "timestamp": "2026-03-29T12:04:46.103634+00:00"
+          "timestamp": "2026-03-29T19:17:14.530951+00:00"
         },
         {
           "role": "assistant",
-          "content": "Answer / Plan:\nYou should take COMP1120 (Foundations of Computing).\n\nWhy (requirements/prereqs satisfied):\n- COMP1120 (Foundations of Computing) is a core program requirement and is eligible.\n\nCitations:\n- COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1120_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n\nClarifying questions (if needed):\n- What is your maximum credit load for next semester?\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset.",
+          "content": "Answer / Plan:\nI do not have that information in the provided catalog/policies.\n\nWhy (requirements/prereqs satisfied):\n- The retrieved catalog chunk for COMP2145 does not include the information you asked for.\n\nCitations:\n- course_COMP2145 | Web Programming | https://southcentral.edu/webdocs/current_cco/COMP2145_cco_2026.pdf\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\n- Course offering and schedule information is not present in the provided catalog data.",
           "artifacts": {
-            "plan": {
-              "mode": "best_next",
-              "recommended_courses": [
-                "COMP1120"
-              ],
-              "total_credits": 4,
-              "direct_course_result": null,
-              "justification": [
-                "COMP1120 (Foundations of Computing) is a core program requirement and is eligible."
-              ],
-              "risks": [
-                "Future course options depend on completing COMP1120."
-              ],
-              "clarifying_questions": [
-                "What is your maximum credit load for next semester?"
-              ],
-              "assumptions": [
-                "COMP2150 is referenced in the program JSON but missing from the course catalog dataset.",
-                "COMP2300 is referenced in the program JSON but missing from the course catalog dataset."
-              ],
-              "alternative_courses": [],
-              "target_program": "AAS_INFORMATION_SYSTEMS",
-              "course_evaluations": {
-                "COMP1120": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1130": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1120"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1120 not completed"
-                  ]
-                },
-                "COMP1140": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1200": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1360": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP2145": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1140",
-                    "COMP1130"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1140 not completed",
-                    "COMP1130 not completed"
-                  ]
-                },
-                "COMP2312": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "Informal prerequisite noted but not enforced: a working knowledge of at least one programming language"
-                  ]
-                },
-                "COMP2460": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1200",
-                    "COMP1360"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1200 not completed",
-                    "COMP1360 not completed"
-                  ]
-                }
-              },
-              "citations": [
-                "COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275"
-              ]
-            },
-            "verification": {
-              "has_retrieved_chunks": true,
-              "recommended_course_ids": [
-                "COMP1120"
-              ],
-              "direct_course_id": null,
-              "chunk_count": 11
-            },
-            "retrieved_chunks": [
-              {
-                "program_id": "AAS_INFORMATION_SYSTEMS",
-                "type": "program",
-                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1",
-                "source_url": "https://southcentral.edu/award/aas3275"
-              },
-              {
-                "chunk_id": "course_COMP2145_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "type": "course",
-                "course_id": "COMP2145",
-                "course_code": "COMP2145"
-              },
-              {
-                "type": "policy",
-                "source_url": "https://southcentral.edu/student-policies/grading-procedure-4000-09-01",
-                "policy_id": "GRADING_POLICY",
-                "chunk_id": "policy_GRADING_POLICY_1"
-              },
-              {
-                "course_id": "COMP2460",
-                "chunk_id": "course_COMP2460_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP2460",
-                "type": "course"
-              },
-              {
-                "type": "course",
-                "chunk_id": "course_COMP1130_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1130",
-                "course_id": "COMP1130"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1200",
-                "course_id": "COMP1200",
-                "chunk_id": "course_COMP1200_1",
-                "type": "course"
-              },
-              {
-                "course_id": "COMP2452",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "type": "course",
-                "chunk_id": "course_COMP2452_1",
-                "course_code": "COMP2452"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1125",
-                "type": "course",
-                "chunk_id": "course_COMP1125_1",
-                "course_code": "COMP1125"
-              },
-              {
-                "chunk_id": "course_COMP1120_1",
-                "type": "course",
-                "course_id": "COMP1120",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1120"
-              },
-              {
-                "type": "course",
-                "chunk_id": "course_COMP1140_1",
-                "course_code": "COMP1140",
-                "course_id": "COMP1140",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "chunk_id": "course_COMP2312_1",
-                "type": "course",
-                "course_id": "COMP2312",
-                "course_code": "COMP2312",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              }
-            ]
-          },
-          "timestamp": "2026-03-29T12:04:52.031054+00:00"
-        },
-        {
-          "role": "user",
-          "content": "Who teaches COMP2145?",
-          "artifacts": null,
-          "timestamp": "2026-03-29T12:05:22.770621+00:00"
-        },
-        {
-          "role": "assistant",
-          "content": "Answer / Plan:\nI don't have that information in the provided catalog or policies.\n\nWhy (requirements/prereqs satisfied):\n- I don't have that information in the provided catalog or policies.\n\nCitations:\n- COMP2145: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2145_1)\n- COMP2460: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2460_1)\n- COMP2453: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2453_1)\n- COMP1360: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1360_1)\n- COMP2462: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2462_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n- COMP1200: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1200_1)\n- COMP2452: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2452_1)\n- COMP1125: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1125_1)\n- COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1120_1)\n- COMP2498: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP2498_1)\n\nClarifying questions (if needed):\nNone\n\nAssumptions / Not in catalog:\nNone",
-          "artifacts": {
-            "plan": {
-              "mode": "clarification_only",
-              "recommended_courses": [],
-              "total_credits": 0,
-              "direct_course_result": null,
-              "justification": [
-                "I don't have that information in the provided catalog or policies."
-              ],
-              "risks": [],
+            "planner_output": {
+              "answer_plan": "I do not have that information in the provided catalog/policies.",
+              "why": [],
+              "citations": [],
               "clarifying_questions": [],
-              "assumptions": [],
-              "alternative_courses": [],
-              "target_program": "AAS_INFORMATION_SYSTEMS",
-              "course_evaluations": {},
-              "citations": []
-            },
-            "verification": {
-              "has_retrieved_chunks": true,
-              "recommended_course_ids": [],
-              "direct_course_id": null,
-              "chunk_count": 11
-            },
-            "retrieved_chunks": [
-              {
-                "course_code": "COMP2145",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP2145_1",
-                "type": "course",
-                "course_id": "COMP2145"
-              },
-              {
-                "course_id": "COMP2460",
-                "type": "course",
-                "course_code": "COMP2460",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP2460_1"
-              },
-              {
-                "course_id": "COMP2453",
-                "course_code": "COMP2453",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP2453_1",
-                "type": "course"
-              },
-              {
-                "type": "course",
-                "course_code": "COMP1360",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1360",
-                "chunk_id": "course_COMP1360_1"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP2462",
-                "course_id": "COMP2462",
-                "chunk_id": "course_COMP2462_1",
-                "type": "course"
-              },
-              {
-                "source_url": "https://southcentral.edu/award/aas3275",
-                "program_id": "AAS_INFORMATION_SYSTEMS",
-                "type": "program",
-                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1"
-              },
-              {
-                "type": "course",
-                "course_code": "COMP1200",
-                "chunk_id": "course_COMP1200_1",
-                "course_id": "COMP1200",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "chunk_id": "course_COMP2452_1",
-                "course_code": "COMP2452",
-                "course_id": "COMP2452",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "course_id": "COMP1125",
-                "type": "course",
-                "chunk_id": "course_COMP1125_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1125"
-              },
-              {
-                "chunk_id": "course_COMP1120_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP1120",
-                "course_id": "COMP1120",
-                "type": "course"
-              },
-              {
-                "chunk_id": "course_COMP2498_1",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP2498",
-                "course_code": "COMP2498"
-              }
-            ]
-          },
-          "timestamp": "2026-03-29T12:05:28.224508+00:00"
-        }
-      ]
-    },
-    {
-      "session_id": "68bb016c-0132-488a-8bd1-b3ade3f978b7",
-      "title": "hii",
-      "created_at": "2026-03-29T11:51:50.994602+00:00",
-      "updated_at": "2026-03-29T11:54:42.844706+00:00",
-      "messages": [
-        {
-          "role": "user",
-          "content": "hii",
-          "artifacts": null,
-          "timestamp": "2026-03-29T11:54:35.149589+00:00"
-        },
-        {
-          "role": "assistant",
-          "content": "Answer / Plan:\nYou should take COMP1120 (Foundations of Computing).\n\nWhy (requirements/prereqs satisfied):\n- COMP1120 (Foundations of Computing) is a core program requirement and is eligible.\n\nCitations:\n- COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog (course_COMP1120_1)\n- AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275 (program_AAS_INFORMATION_SYSTEMS_1)\n\nClarifying questions (if needed):\n- What is your maximum credit load for next semester?\n\nAssumptions / Not in catalog:\n- COMP2150 is referenced in the program JSON but missing from the course catalog dataset.\n- COMP2300 is referenced in the program JSON but missing from the course catalog dataset.",
-          "artifacts": {
-            "plan": {
-              "mode": "best_next",
-              "recommended_courses": [
-                "COMP1120"
-              ],
-              "total_credits": 4,
-              "direct_course_result": null,
-              "justification": [
-                "COMP1120 (Foundations of Computing) is a core program requirement and is eligible."
-              ],
-              "risks": [
-                "Future course options depend on completing COMP1120."
-              ],
-              "clarifying_questions": [
-                "What is your maximum credit load for next semester?"
-              ],
-              "assumptions": [
-                "COMP2150 is referenced in the program JSON but missing from the course catalog dataset.",
-                "COMP2300 is referenced in the program JSON but missing from the course catalog dataset."
-              ],
-              "alternative_courses": [],
-              "target_program": "AAS_INFORMATION_SYSTEMS",
-              "course_evaluations": {
-                "COMP1120": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1130": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1120"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1120 not completed"
-                  ]
-                },
-                "COMP1140": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1200": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP1360": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "No prerequisites listed"
-                  ]
-                },
-                "COMP2145": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1140",
-                    "COMP1130"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1140 not completed",
-                    "COMP1130 not completed"
-                  ]
-                },
-                "COMP2312": {
-                  "decision": "Eligible",
-                  "missing": [],
-                  "manual_review": false,
-                  "reason": [
-                    "Informal prerequisite noted but not enforced: a working knowledge of at least one programming language"
-                  ]
-                },
-                "COMP2460": {
-                  "decision": "Not Eligible",
-                  "missing": [
-                    "COMP1200",
-                    "COMP1360"
-                  ],
-                  "manual_review": false,
-                  "reason": [
-                    "COMP1200 not completed",
-                    "COMP1360 not completed"
-                  ]
-                }
-              },
-              "citations": [
-                "COMP1120: https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "AAS_INFORMATION_SYSTEMS: https://southcentral.edu/award/aas3275"
+              "assumptions_not_in_catalog": [
+                "Planner model was unavailable, so a conservative grounded fallback was used.",
+                "Groq planner quota or rate limit was unavailable during this run."
               ]
             },
-            "verification": {
-              "has_retrieved_chunks": true,
-              "recommended_course_ids": [
-                "COMP1120"
+            "verified_output": {
+              "answer_plan": "I do not have that information in the provided catalog/policies.",
+              "why": [
+                "The retrieved catalog chunk for COMP2145 does not include the information you asked for."
               ],
-              "direct_course_id": null,
-              "chunk_count": 14
+              "citations": [
+                "course_COMP2145"
+              ],
+              "clarifying_questions": [],
+              "assumptions_not_in_catalog": [
+                "Course offering and schedule information is not present in the provided catalog data."
+              ]
             },
             "retrieved_chunks": [
               {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMM140",
-                "course_id": "COMM140",
-                "chunk_id": "course_COMM140_1",
-                "type": "course"
-              },
-              {
-                "policy_id": "GRADING_POLICY",
-                "chunk_id": "policy_GRADING_POLICY_1",
-                "source_url": "https://southcentral.edu/student-policies/grading-procedure-4000-09-01",
-                "type": "policy"
-              },
-              {
-                "course_id": "COMM160",
-                "type": "course",
-                "course_code": "COMM160",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMM160_1"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "type": "course",
-                "chunk_id": "course_COMM110_1",
-                "course_code": "COMM110",
-                "course_id": "COMM110"
-              },
-              {
-                "course_code": "COMM100",
-                "course_id": "COMM100",
-                "chunk_id": "course_COMM100_1",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "type": "program",
-                "source_url": "https://southcentral.edu/award/aas3275",
-                "program_id": "AAS_INFORMATION_SYSTEMS",
-                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1"
-              },
-              {
-                "course_code": "COMP1200",
-                "chunk_id": "course_COMP1200_1",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1200"
-              },
-              {
-                "chunk_id": "course_COMP2452_1",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP2452",
-                "course_id": "COMP2452"
-              },
-              {
-                "course_id": "COMP1125",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP1125_1",
-                "course_code": "COMP1125"
-              },
-              {
-                "course_code": "COMP1120",
-                "type": "course",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP1120",
-                "chunk_id": "course_COMP1120_1"
-              },
-              {
-                "type": "course",
-                "course_id": "COMP1130",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "chunk_id": "course_COMP1130_1",
-                "course_code": "COMP1130"
-              },
-              {
-                "course_id": "COMP1140",
-                "course_code": "COMP1140",
-                "type": "course",
-                "chunk_id": "course_COMP1140_1",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog"
-              },
-              {
-                "type": "course",
-                "course_code": "COMP2145",
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_id": "COMP2145",
-                "chunk_id": "course_COMP2145_1"
-              },
-              {
-                "source_url": "https://southcentral.edu/majors-and-programs/course-descriptions-academic-catalog",
-                "course_code": "COMP2312",
-                "type": "course",
-                "chunk_id": "course_COMP2312_1",
-                "course_id": "COMP2312"
+                "chunk_id": "course_COMP2145",
+                "title": "Web Programming",
+                "record_type": "course",
+                "entity_id": "COMP2145",
+                "source_url": "https://southcentral.edu/webdocs/current_cco/COMP2145_cco_2026.pdf"
               }
             ]
           },
-          "timestamp": "2026-03-29T11:54:42.844706+00:00"
+          "timestamp": "2026-03-29T19:17:16.964028+00:00"
         }
       ]
     }

@@ -2,12 +2,11 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
-from pathlib import Path
 
 import gradio as gr
 
 from src.graph.graph import build_planning_graph
-from src.graph.state import GraphState
+from src.graph.state import build_initial_state
 from src.planning.constants import (
     DEFAULT_COURSE_FILE,
     DEFAULT_GRADIO_HISTORY_FILE,
@@ -60,8 +59,8 @@ def build_app() -> gr.Blocks:
         send_button = gr.Button("Send", variant="primary")
 
         with gr.Accordion("Debug Panel", open=False):
-            plan_json = gr.Code(label="Latest Plan JSON", language="json")
-            verification_json = gr.Code(label="Verification", language="json")
+            plan_json = gr.Code(label="Planner Output JSON", language="json")
+            verification_json = gr.Code(label="Verified Output JSON", language="json")
             citations_json = gr.Code(label="Retrieved Chunk Metadata", language="json")
 
         demo.load(
@@ -121,14 +120,14 @@ def _handle_message(message: str, history: dict, session_id: str):
     history = append_message(session_id, "user", message.strip(), path=DEFAULT_GRADIO_HISTORY_FILE)
     result = _run_graph(message.strip())
     artifacts = {
-        "plan": result["plan"],
-        "verification": result.get("verification", {}),
+        "planner_output": result.get("planner_output", {}),
+        "verified_output": result.get("verified_output", {}),
         "retrieved_chunks": _chunk_metadata(result.get("retrieved_chunks", [])),
     }
     history = append_message(
         session_id,
         "assistant",
-        result["response_text"],
+        result["final_response"],
         artifacts=artifacts,
         path=DEFAULT_GRADIO_HISTORY_FILE,
     )
@@ -138,8 +137,8 @@ def _handle_message(message: str, history: dict, session_id: str):
         history,
         session_id,
         chat_messages(session),
-        _pretty_json(artifacts["plan"]),
-        _pretty_json(artifacts["verification"]),
+        _pretty_json(artifacts["planner_output"]),
+        _pretty_json(artifacts["verified_output"]),
         _pretty_json(artifacts["retrieved_chunks"]),
         gr.update(choices=session_choices(history), value=session_id),
     )
@@ -178,8 +177,8 @@ def _switch_session(history: dict, session_id: str):
     return (
         session_id,
         chat_messages(session),
-        _pretty_json(artifacts.get("plan")),
-        _pretty_json(artifacts.get("verification")),
+        _pretty_json(_artifact_value(artifacts, "planner_output", "plan")),
+        _pretty_json(_artifact_value(artifacts, "verified_output", "verification")),
         _pretty_json(artifacts.get("retrieved_chunks")),
         gr.update(choices=session_choices(history), value=session_id),
     )
@@ -190,35 +189,44 @@ def _load_session_view(history: dict, session_id: str):
     artifacts = latest_artifacts(session)
     return (
         chat_messages(session),
-        _pretty_json(artifacts.get("plan")),
-        _pretty_json(artifacts.get("verification")),
+        _pretty_json(_artifact_value(artifacts, "planner_output", "plan")),
+        _pretty_json(_artifact_value(artifacts, "verified_output", "verification")),
         _pretty_json(artifacts.get("retrieved_chunks")),
         gr.update(choices=session_choices(history), value=session_id),
     )
 
 
 def _run_graph(query: str) -> dict:
-    return _graph().invoke(
-        GraphState(
-            query=query,
-            courses_path=DEFAULT_COURSE_FILE,
-            program_path=DEFAULT_PROGRAM_FILE,
-            policies_path=DEFAULT_POLICY_FILE,
-            output_path=None,
-            rebuild_index=False,
-            print_explanation=True,
-        )
-    )
+    state = build_initial_state(query=query, rebuild_index=False)
+    state["courses_path"] = DEFAULT_COURSE_FILE
+    state["program_path"] = DEFAULT_PROGRAM_FILE
+    state["policies_path"] = DEFAULT_POLICY_FILE
+    return _graph().invoke(state)
 
 
 def _chunk_metadata(retrieved_chunks: list[dict]) -> list[dict]:
-    return [dict(item.get("metadata", {})) for item in retrieved_chunks]
+    return [
+        {
+            "chunk_id": item.get("chunk_id"),
+            "title": item.get("metadata", {}).get("title"),
+            "record_type": item.get("metadata", {}).get("record_type"),
+            "entity_id": item.get("metadata", {}).get("entity_id"),
+            "source_url": item.get("metadata", {}).get("source_url"),
+        }
+        for item in retrieved_chunks
+    ]
 
 
 def _pretty_json(value) -> str:
     if value is None:
         value = {}
     return json.dumps(value, indent=2, ensure_ascii=False)
+
+
+def _artifact_value(artifacts: dict, preferred_key: str, legacy_key: str):
+    if preferred_key in artifacts:
+        return artifacts.get(preferred_key)
+    return artifacts.get(legacy_key)
 
 
 if __name__ == "__main__":

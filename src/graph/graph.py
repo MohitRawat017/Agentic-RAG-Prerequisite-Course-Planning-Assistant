@@ -10,7 +10,7 @@ from src.graph.nodes.verifier import verifier_node
 from src.graph.state import GraphState
 
 
-def build_planning_graph():
+def build_graph():
     graph = StateGraph(GraphState)
     graph.add_node("intake", intake_node)
     graph.add_node("retriever", retriever_node)
@@ -19,9 +19,25 @@ def build_planning_graph():
     graph.add_node("formatter", formatter_node)
 
     graph.add_edge(START, "intake")
-    graph.add_edge("intake", "retriever")
+    graph.add_conditional_edges(
+        "intake",
+        _route_after_intake,
+        {
+            "retriever": "retriever",
+            "formatter": "formatter",
+        },
+    )
     graph.add_edge("retriever", "planner")
     graph.add_edge("planner", "verifier")
     graph.add_edge("verifier", "formatter")
     graph.add_edge("formatter", END)
     return graph.compile()
+
+
+def build_planning_graph():
+    return build_graph()
+
+
+def _route_after_intake(state: GraphState) -> str:
+    return "formatter" if state.get("skip_to_formatter") else "retriever"
+
