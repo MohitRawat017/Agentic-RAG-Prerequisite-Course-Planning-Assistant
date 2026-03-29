@@ -132,3 +132,119 @@ def _grounded_chunks() -> list[dict]:
             },
         },
     ]
+
+
+def test_build_plan_explanation_uses_fallback_evidence_when_course_chunk_missing() -> None:
+    """Happy-path plan must NOT abstain when the specific course chunk is absent but program chunk is present."""
+    plan = {
+        "mode": "full_plan",
+        "recommended_courses": ["COMP1140"],
+        "total_credits": 3,
+        "direct_course_result": None,
+        "justification": ["COMP1140 (Web for Business) is a core program requirement and is eligible."],
+        "risks": [],
+        "clarifying_questions": [],
+        "assumptions": [],
+        "alternative_courses": [],
+    }
+    request = {
+        "query": "Plan my next semester",
+        "target_program": "AAS_INFORMATION_SYSTEMS",
+    }
+    # Provide only program evidence — no course-specific chunk for COMP1140
+    program_only_chunks = [
+        {
+            "text": "Program AAS_INFORMATION_SYSTEMS. Core courses: COMP1140.",
+            "metadata": {
+                "type": "program",
+                "program_id": "AAS_INFORMATION_SYSTEMS",
+                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1",
+                "source_url": "https://example.com/program",
+                "page_number": None,
+            },
+        },
+    ]
+
+    explanation = build_plan_explanation(plan, request, _courses_by_id(), program_only_chunks)
+
+    assert "I don't have that information in the provided catalog or policies." not in explanation
+    assert "Answer / Plan:" in explanation
+    assert "You should take" in explanation
+    assert "Citations:" in explanation
+    assert "AAS_INFORMATION_SYSTEMS" in explanation
+
+
+def test_build_plan_explanation_direct_eligible_uses_fallback_when_course_chunk_missing() -> None:
+    """Direct-course Eligible result must not abstain when course chunk is absent but other evidence exists."""
+    plan = {
+        "mode": "direct_course_check",
+        "recommended_courses": [],
+        "total_credits": 0,
+        "direct_course_result": {
+            "course_id": "COMP1140",
+            "decision": "Eligible",
+            "missing": [],
+            "details": "",
+        },
+        "justification": ["COMP1140 prerequisites satisfied."],
+        "risks": [],
+        "clarifying_questions": [],
+        "assumptions": [],
+        "alternative_courses": [],
+    }
+    request = {
+        "query": "Can I take COMP1140?",
+        "target_program": "AAS_INFORMATION_SYSTEMS",
+    }
+    program_only_chunks = [
+        {
+            "text": "Program AAS_INFORMATION_SYSTEMS. Core courses: COMP1140.",
+            "metadata": {
+                "type": "program",
+                "program_id": "AAS_INFORMATION_SYSTEMS",
+                "chunk_id": "program_AAS_INFORMATION_SYSTEMS_1",
+                "source_url": "https://example.com/program",
+                "page_number": None,
+            },
+        },
+    ]
+
+    explanation = build_plan_explanation(plan, request, _courses_by_id(), program_only_chunks)
+
+    assert "I don't have that information in the provided catalog or policies." not in explanation
+    assert "You can take" in explanation
+
+
+def test_build_plan_explanation_partial_justification_evidence_kept() -> None:
+    """Justification lines whose course codes are only partially in evidence must still be shown."""
+    plan = {
+        "mode": "full_plan",
+        "recommended_courses": ["COMP1140"],
+        "total_credits": 3,
+        "direct_course_result": None,
+        # Justification references two course codes; only COMP1140 has a chunk
+        "justification": ["COMP1140 requires COMP1130 as a prerequisite and is a core program requirement."],
+        "risks": [],
+        "clarifying_questions": [],
+        "assumptions": [],
+        "alternative_courses": [],
+    }
+    request = {"query": "Plan my next semester"}
+    # Only COMP1140 chunk — no COMP1130 chunk
+    chunks = [
+        {
+            "text": "Course COMP1140: Web for Business. Prerequisites: COMP1130.",
+            "metadata": {
+                "type": "course",
+                "course_id": "COMP1140",
+                "chunk_id": "course_COMP1140_1",
+                "source_url": "https://example.com/1140",
+                "page_number": None,
+            },
+        },
+    ]
+
+    explanation = build_plan_explanation(plan, request, _courses_by_id(), chunks)
+
+    assert "Why (requirements/prereqs satisfied):" in explanation
+    assert "COMP1140 requires COMP1130" in explanation
